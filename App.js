@@ -10,7 +10,6 @@ export default class App extends React.Component {
       name: '',
       photoUrl: '',
     };
-    // this.signOut = this.signOut.bind(this);
   }
   signIn = async () => {
     this.setState({
