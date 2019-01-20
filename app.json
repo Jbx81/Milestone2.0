@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Milestone2.0",
-    "slug": "Milestone2.0",
+    "slug": "Milestone2_0",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
