@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import Expo from 'expo';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -9,8 +10,8 @@ export default class App extends React.Component {
       name: '',
       photoUrl: '',
     };
+    // this.signOut = this.signOut.bind(this);
   }
-
   signIn = async () => {
     this.setState({
       signedIn: true,
@@ -18,16 +19,50 @@ export default class App extends React.Component {
       photoUrl:
         'https://pbs.twimg.com/profile_images/901947348699545601/hqRMHITj_400x400.jpg',
     });
+
+    // try {
+    //   const result = await Expo.Google.logInAsync({
+    //     androidClientId:
+    //       "833456763323-ig9ndr0tbvb62jv4ddn6j8pos3a49m35.apps.googleusercontent.com",
+    //     //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
+    //     scopes: ["profile", "email"]
+    //   })
+
+    //   if (result.type === "success") {
+    //     this.setState({
+    //       signedIn: true,
+    //       name: result.user.name,
+    //       photoUrl: result.user.photoUrl
+    //     })
+    //   } else {
+    //     console.log("cancelled")
+    //   }
+    // } catch (e) {
+    //   console.log("error", e)
+    // }
   };
+
+  signOut = async () => {
+    this.setState({
+      signedIn: false,
+      name: '',
+      photoUrl: '',
+    });
+  };
+
   render() {
     return (
-      <view style={styles.container}>
+      <View style={styles.container}>
         {this.state.signedIn ? (
-          <LoggedInPage name={this.state.name} photoUrl={this.state.photoUrl} />
+          <LoggedInPage
+            name={this.state.name}
+            photoUrl={this.state.photoUrl}
+            signOut={this.signOut}
+          />
         ) : (
           <LoginPage signIn={this.signIn} />
         )}
-      </view>
+      </View>
     );
   }
 }
@@ -44,8 +79,9 @@ const LoginPage = props => {
 const LoggedInPage = props => {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome: {props.name}</Text>
+      <Text style={styles.header}>Welcome:{props.name}</Text>
       <Image style={styles.image} source={{ uri: props.photoUrl }} />
+      <Button title="Log out" onPress={() => props.signOut()} />
     </View>
   );
 };
@@ -61,11 +97,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   image: {
-    marginTop: 15,
+    marginTop: 10,
     width: 150,
     height: 150,
     borderColor: 'rgba(0,0,0,0.2)',
     borderWidth: 3,
-    borderRadius: 150,
+    borderRadius: 100,
   },
 });
