@@ -7,12 +7,6 @@ const User = db.define('user', {
     unique: true,
     allowNull: false,
   },
-  role: {
-    type: Sequelize.STRING,
-    validate: {
-      isIn: [['Project Manager', 'Collaborator']],
-    },
-  },
   googleId: {
     type: Sequelize.STRING,
   },

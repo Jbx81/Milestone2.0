@@ -17,6 +17,7 @@ export default class App extends React.Component {
       name: '',
       photoUrl: '',
       user: {},
+      accessToken: '',
     };
   }
   signIn = async () => {
@@ -44,10 +45,11 @@ export default class App extends React.Component {
           name: result.user.name,
           photoUrl: result.user.photoUrl,
           user: result.user,
+          accessToken: result.accessToken,
         });
         console.log('returned result: ', result);
       } else {
-        console.log('cancelled');
+        console.log('Result type: ', result.type);
       }
     } catch (e) {
       console.log('error', e);
@@ -71,6 +73,7 @@ export default class App extends React.Component {
             photoUrl={this.state.photoUrl}
             signOut={this.signOut}
             user={this.state.user}
+            accessToken={this.state.accessToken}
           />
         ) : (
           <LoginPage signIn={this.signIn} />
@@ -95,7 +98,7 @@ const LoggedInPage = props => {
       <Text style={styles.header}>Welcome:{props.name}</Text>
       <Image style={styles.image} source={{ uri: props.photoUrl }} />
       <Button title="Log out" onPress={() => props.signOut()} />
-      <AddProject user={props.user} />;
+      <AddProject user={props.user} accessToken={props.accessToken} />;
     </View>
   );
 };
