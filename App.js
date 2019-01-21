@@ -18,33 +18,33 @@ export default class App extends React.Component {
     };
   }
   signIn = async () => {
-    this.setState({
-      signedIn: true,
-      name: 'Jon Snow',
-      photoUrl:
-        'https://pbs.twimg.com/profile_images/901947348699545601/hqRMHITj_400x400.jpg',
-    });
+    // this.setState({
+    //   signedIn: true,
+    //   name: 'Jon Snow',
+    //   photoUrl:
+    //     'https://pbs.twimg.com/profile_images/901947348699545601/hqRMHITj_400x400.jpg',
+    // });
 
-    // try {
-    //   const result = await Expo.Google.logInAsync({
-    //     androidClientId:
-    //       "833456763323-ig9ndr0tbvb62jv4ddn6j8pos3a49m35.apps.googleusercontent.com",
-    //     //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
-    //     scopes: ["profile", "email"]
-    //   })
+    try {
+      const result = await Expo.Google.logInAsync({
+        androidClientId: androidClientId,
+        iosClientId: iosClientId,
+        scopes: ['profile', 'email', 'Calendar API, v3'],
+      });
 
-    //   if (result.type === "success") {
-    //     this.setState({
-    //       signedIn: true,
-    //       name: result.user.name,
-    //       photoUrl: result.user.photoUrl
-    //     })
-    //   } else {
-    //     console.log("cancelled")
-    //   }
-    // } catch (e) {
-    //   console.log("error", e)
-    // }
+      if (result.type === 'success') {
+        this.setState({
+          signedIn: true,
+          name: result.user.name,
+          photoUrl: result.user.photoUrl,
+        });
+        console.log('returned result: ', result);
+      } else {
+        console.log('cancelled');
+      }
+    } catch (e) {
+      console.log('error', e);
+    }
   };
 
   signOut = async () => {
