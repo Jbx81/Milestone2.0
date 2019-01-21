@@ -7,6 +7,7 @@ import {
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
 } from './superSecret';
+import AddProject from './AddProject';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class App extends React.Component {
       signedIn: false,
       name: '',
       photoUrl: '',
+      user: {},
     };
   }
   signIn = async () => {
@@ -29,7 +31,11 @@ export default class App extends React.Component {
       const result = await Expo.Google.logInAsync({
         androidClientId: androidClientId,
         iosClientId: iosClientId,
-        scopes: ['profile', 'email', 'Calendar API, v3'],
+        scopes: [
+          'profile',
+          'email',
+          'https://www.googleapis.com/auth/calendar',
+        ],
       });
 
       if (result.type === 'success') {
@@ -37,6 +43,7 @@ export default class App extends React.Component {
           signedIn: true,
           name: result.user.name,
           photoUrl: result.user.photoUrl,
+          user: result.user,
         });
         console.log('returned result: ', result);
       } else {
@@ -63,6 +70,7 @@ export default class App extends React.Component {
             name={this.state.name}
             photoUrl={this.state.photoUrl}
             signOut={this.signOut}
+            user={this.state.user}
           />
         ) : (
           <LoginPage signIn={this.signIn} />
@@ -87,6 +95,7 @@ const LoggedInPage = props => {
       <Text style={styles.header}>Welcome:{props.name}</Text>
       <Image style={styles.image} source={{ uri: props.photoUrl }} />
       <Button title="Log out" onPress={() => props.signOut()} />
+      <AddProject user={props.user} />;
     </View>
   );
 };
