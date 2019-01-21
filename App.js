@@ -1,6 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import Expo from 'expo';
+import {
+  androidClientId,
+  iosClientId,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+} from './superSecret';
 
 export default class App extends React.Component {
   constructor(props) {
