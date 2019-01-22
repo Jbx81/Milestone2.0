@@ -6,21 +6,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   header: {
     fontSize: 25,
+    padding: 10,
+    // color: 'rgba(0,0,0,0.2)',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   image: {
-    marginTop: 10,
-    width: 150,
-    height: 150,
+    marginTop: 20,
+    width: 200,
+    height: 200,
     borderColor: 'rgba(0,0,0,0.2)',
-    borderWidth: 3,
-    borderRadius: 100,
+    borderWidth: 2,
+    borderRadius: 50,
   },
   welcome: {
-    marginTop: 100,
+    marginTop: 20,
+    flex: 3,
   },
 });
 

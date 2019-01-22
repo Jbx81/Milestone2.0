@@ -72,17 +72,7 @@ export default class GoogleAuth extends React.Component {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${props.accessToken}`,
           },
-          body: JSON.stringify({
-            summary: 'New Project',
-            end: {
-              dateTime: '2019-01-22T09:00:00-07:00',
-              timeZone: 'America/Los_Angeles',
-            },
-            start: {
-              dateTime: '2019-01-22T09:00:00-07:00',
-              timeZone: 'America/Los_Angeles',
-            },
-          }),
+          body: JSON.stringify(props.event),
         }
       );
       console.log(
@@ -105,6 +95,7 @@ export default class GoogleAuth extends React.Component {
             user={this.state.user}
             accessToken={this.state.accessToken}
             createEvent={this.createEvent}
+            event={this.props.event}
           />
         ) : (
           <LoginPage signIn={this.signIn} />
@@ -127,26 +118,19 @@ const LoginPage = props => {
 const LoggedInPage = props => {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome:{props.name}</Text>
+      <Text style={styles.header}>Welcome: {props.user.givenName}</Text>
+      <AddProject {...props} />
       <Image style={styles.image} source={{ uri: props.photoUrl }} />
       <Button title="Log out" onPress={() => props.signOut()} />
-      <AddProject
-        user={props.user}
-        accessToken={props.accessToken}
-        createEvent={props.createEvent}
-        {...props}
-      />
     </View>
   );
 };
 
 const AddProject = props => {
+  const { createEvent } = props;
   return (
     <View>
-      <Button
-        title="Add Your Project"
-        onPress={() => props.createEvent(props)}
-      />
+      <Button title="Add Your Project" onPress={() => createEvent(props)} />
     </View>
   );
 };
