@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 100,
   },
+  welcome: {
+    marginTop: 100,
+  },
 });
 
 export default styles;
