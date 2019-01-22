@@ -109,8 +109,12 @@ export default class GoogleAuth extends React.Component {
 const LoginPage = props => {
   return (
     <View>
-      <Text style={styles.header}>Sign In With Google</Text>
-      <Button title="Sign in with Google" onPress={() => props.signIn()} />
+      {/* <Text style={styles.header}>Sign In With Google</Text> */}
+      <Button
+        style={styles.button}
+        title="Sign in with Google"
+        onPress={() => props.signIn()}
+      />
     </View>
   );
 };

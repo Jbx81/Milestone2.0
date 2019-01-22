@@ -10,6 +10,8 @@ export default class ProjectForm extends React.Component {
     projSummary: '',
     projStart: '',
     projEnd: '',
+    milestoneSummary: '',
+    milestoneDueDate: '',
     eventStored: false,
   };
 
@@ -69,14 +71,34 @@ export default class ProjectForm extends React.Component {
                     value={this.state.projEnd}
                     onChangeText={text => this.setState({ projEnd: text })}
                   />
-                  <Button onPress={handleSubmit} style={styles.button}>
+
+                  <TextInput
+                    label="Milestone"
+                    type="outlined"
+                    value={this.state.milestoneSummary}
+                    onChangeText={text =>
+                      this.setState({ milestoneSummary: text })
+                    }
+                  />
+
+                  <TextInput
+                    label="Milestone Due Date"
+                    type="outlined"
+                    placeholder="yyyy-mm-dd"
+                    value={this.state.milestoneDueDate}
+                    onChangeText={text =>
+                      this.setState({ milestoneDueDate: text })
+                    }
+                  />
+
+                  <Button style={styles.button}>
                     Log In With Google to Save Project
                   </Button>
                 </View>
               )}
             </Formik>
           </View>
-          {this.state.eventStored ? <GoogleAuth event={event1} /> : null}
+          <GoogleAuth event={event1} />
         </View>
       </View>
     );

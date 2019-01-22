@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flex: 3,
   },
+  button: {
+    fontSize: 25,
+    marginTop: 16,
+  },
 });
 
 export default styles;

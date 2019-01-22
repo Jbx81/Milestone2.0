@@ -23,7 +23,7 @@ export default class App extends React.Component {
               source={require('./assets/milestone_512.png')}
             />
             <View>
-              <Text style={styles.header}>Milestones</Text>
+              <Text style={styles.button}>Milestones</Text>
             </View>
           </View>
           <ProjectForm />
